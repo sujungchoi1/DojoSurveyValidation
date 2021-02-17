@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <title>Dojo Survey</title>
+</head>
+@{
+    string[] locations = new string[]
+    {
+        "Seattle", "San Jose", "Dallas", "Chicago", "East Bay", "Online", "Burbank"
+    };
+
+    string[] languages = new string[]
+    {
+        "C#", "Python", "Java", "Javascript", "Ruby", "C++"
+    };
+}
+@model Survey
+
+<body>
+    <div class="wrapper">
+        <h2>Dojo Survey</h2>
+        <form asp-action="Result" asp-controller="Home" method="post">
+            <div class="row mb-3">
+                <label asp-for="Name" class="col-sm col-form-label"></label>
+                <span asp-validation-for="Name"></span>
+                <div class="col-sm">
+                    <input asp-for="Name" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Location" class="col-sm col-form-label"></label>
+                <span asp-validation-for="Location"></span>
+                <div class="col-sm">
+                    <select asp-for="Location" class="form-select" id="">
+                        <option selected disabled>Select location</option>
+                        @foreach(var loc in locations)
+                        {
+                            <option value="@loc">@loc</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Language" class="col-sm col-form-label"></label>
+                <span asp-validation-for="Language"></span>
+                <div class="col-sm">
+                    <select asp-for="Language" class="form-select" id="">
+                        <option selected disabled>Select language</option>
+                        @foreach(var lang in languages)
+                        {
+                            <option value="@lang">@lang</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Comment" class="form-label"></label>
+                <span asp-validation-for="Comment"></span>
+                <textarea asp-for="Comment" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="submitButton">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+                
+        </form>
+    </div>
+</body>
+
+</html>
